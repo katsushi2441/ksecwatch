@@ -1,0 +1,22 @@
+{
+ "_説明": "Kurage Security Watch の設定。これを config.json に写して書き換える。合言葉・FTP・メールのパスワードは env_file に書く（このファイルには書かない）",
+ "env_file": ".env",
+ "agent_url": "https://www.example.co.jp/ksecwatch/agent.php",
+ "server": {
+  "_説明": "ftp_home＝見張り役の本体と台帳を置く、公開フォルダの外の場所（FTP で見たパス）。fs_home＝同じ場所をサーバーの中から見たパス（PHP の __DIR__ で確かめる）。ftp_public＝呼び出し口 agent.php を置く公開フォルダ",
+  "ftp_home": "/ksecwatch",
+  "fs_home": "/home/users/0/example/ksecwatch",
+  "ftp_public": "/web/www_example_co_jp/ksecwatch"
+ },
+ "sites": {
+  "_説明": "見張るサイト。root はサーバーの中から見た公開フォルダのパス。skip は見ないフォルダ（root からの位置）",
+  "www.example.co.jp": {"root": "/home/users/0/example/web/www_example_co_jp", "skip": ["/cache"]}
+ },
+ "local_dirs": ["/srv/deploy/www.example.co.jp"],
+ "alert_to": "it@example.co.jp",
+ "policy_local": {
+  "data_php": [],
+  "quiet": [],
+  "yara_allow": []
+ }
+}

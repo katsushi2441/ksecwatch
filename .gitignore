@@ -1,0 +1,13 @@
+# 台帳・検査の記録（サーバーのファイルの一覧と指紋が入る）
+data/
+.venv/
+# php-malware-finder のルール（LGPL-3.0。README の手順で取ってくる）
+rules/
+# 試験用の見本（EICAR・裏口のまね）
+outputs/samples/
+__pycache__/
+config.json
+.env
+demo/out/
+demo/sample.sqlite
+outputs/

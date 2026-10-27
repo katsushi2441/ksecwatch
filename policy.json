@@ -1,0 +1,29 @@
+{
+ "_説明": "見張りの決まり（scripts/watch.py が読む）。パスはサイトの公開フォルダからの位置で、* は何文字でも（/ も含む）。この会社だけの決まりは config.json の policy_local に足す",
+ "data_php": {
+  "_説明": "サーバー自身が書き換える、データ入れの PHP。変わるのがふつうなので知らせない。代わりに中身を取り、先頭に実行を止める1行があって、そのあとに PHP の始まり（<?）が無いことを確かめる。崩れていたら重大として知らせる",
+  "paths": [
+   "*/bl-content/databases/*.php"
+  ]
+ },
+ "quiet": {
+  "_説明": "サーバー側で作り直されるのがふつうのもの（Laravel が画面の部品を変換した結果など）。変化は記録するが知らせない。YARA にはかける",
+  "paths": [
+   "*/storage/framework/views/*.php"
+  ]
+ },
+ "yara_allow": {
+  "_説明": "YARA が正規のものに反応すると分かっているもの（2026-10-27 の全件検査で確認）。rule を省くと、そのパスのすべての規則",
+  "items": [
+   {
+    "path": "*/vendor/thecodingmachine/safe/*",
+    "why": "PHP の関数を包むだけの正規ライブラリ（EspoCRM が使う）。system などの名前を並べている"
+   },
+   {
+    "path": "*/storage/framework/views/*.php",
+    "rule": "ObfuscatedPhp:$nano",
+    "why": "Laravel が変換した画面の部品"
+   }
+  ]
+ }
+}
